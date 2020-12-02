@@ -150,7 +150,7 @@ except ClientError as e:
 
 
 
-ascl = boto3.client('autoscaling')
+ascl = boto3.client('autoscaling', region_name='us-east-1')
 
 #Cria Lanuch Template para usar no autoscaling depois
 LaunchConfigName = 'LaunchConfigProjeto'
@@ -193,7 +193,6 @@ try:
         TargetGroupARNs=[
             targetgroupArn,
         ],
-        PlacementGroup='string',
         VPCZoneIdentifier=VPCzone,
         Tags=[
             {
