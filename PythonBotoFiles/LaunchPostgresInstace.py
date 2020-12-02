@@ -14,53 +14,10 @@ sudo systemctl restart postgresql'''
 
 ec2 = boto3.client('ec2', region_name='us-east-2')
 
-#Checar se existe instancia do postgres rodando 
-#se sim terminar-la e criar outra
 key_name = 'Rapha_Cloud'
 secgrp = 'SecurityProjeto'
 ubuntu18_AMI = 'ami-0dd9f0e7df0f0a138'
 instance_name = 'PostgresDB'
-
-#Checa se existe
-try:
-    response = ec2.describe_instances(
-        Filters=[
-            {
-                'Name': 'tag:Name',
-                'Values': [
-                    instance_name,
-                ]
-            },
-            {
-                'Name': 'instance-state-name',
-                'Values': [
-                    'running',
-                ]
-            },
-            {
-                'Name': 'tag:Projeto',
-                'Values': [
-                    'ProjetoRapha',
-                ]
-            }
-        ]
-    )
-    #print(response)
-    instance_id = response['Reservations'][0]['Instances'][0]['InstanceId']
-    #print(instance_id)
-    print('Instancia ' + instance_name + ' ja existe, deletando...')
-    #Deleta se existe
-    try:
-        response = ec2.terminate_instances(
-            InstanceIds=[
-                instance_id,
-            ]
-        )
-    except ClientError as e:
-        print(e)
-        print('Falha ao deletar instancia')
-except:
-    print('Instancia nao existe')
 
 #Cria instancia
 try:

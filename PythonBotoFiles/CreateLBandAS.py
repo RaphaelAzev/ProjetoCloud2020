@@ -199,6 +199,10 @@ try:
                 'Key': 'Projeto',
                 'Value': 'ProjetoRapha'
             },
+            {
+                'Key': 'Name',
+                'Value': 'ProjetoServer'
+            }
         ],
     )
     time.sleep(15)

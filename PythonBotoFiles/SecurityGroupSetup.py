@@ -1,34 +1,13 @@
 import boto3
 from botocore.exceptions import ClientError
+import time
 
 ec2 = boto3.client('ec2', region_name='us-east-1')
 
 print("Configurando security group para a regiao us-east-1 (NorthVirginia)")
 
-#Delete security group if exists, then create one
+#Create Security Group
 secgrp = "SecurityProjeto"
-
-try:
-    response = ec2.describe_security_groups(
-        Filters=[
-            {
-                'Name': 'group-name',
-                'Values': [
-                    secgrp,
-                ],
-            },
-        ],
-    )
-    group_id = response['SecurityGroups'][0]['GroupId']
-    print('Security Group ' + secgrp + ' ja existe, deletando...')
-    try:
-        response = ec2.delete_security_group(GroupName = secgrp)
-    except ClientError as e:
-        print(e) 
-    #print(response)
-except:
-    print('Security Group nao existe')
-    #print(e)
 
 try:
     response = ec2.create_security_group(
@@ -84,31 +63,8 @@ ec2 = boto3.client('ec2', region_name='us-east-2')
 
 print("Configurando security group para a regiao us-east-2 (Ohio)")
 
-#Delete security group if exists, then create one
+#Create Security Group
 secgrp = "SecurityProjeto"
-
-try:
-    response = ec2.describe_security_groups(
-        Filters=[
-            {
-                'Name': 'group-name',
-                'Values': [
-                    secgrp,
-                ],
-            },
-        ],
-    )
-    group_id = response['SecurityGroups'][0]['GroupId']
-    print('Security Group ' + secgrp + ' ja existe, deletando...')
-    try:
-        response = ec2.delete_security_group(GroupName = secgrp)
-    except ClientError as e:
-        print(e)
-
-    #print(response)
-except:
-    print('Security Group nao existe')
-    #print(e)
 
 try:
     response = ec2.create_security_group(
@@ -158,3 +114,5 @@ try:
     print("Regras corretamente adicionadas ao grupo")
 except ClientError as e:
     print(e)
+
+time.sleep(20)
