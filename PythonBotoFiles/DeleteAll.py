@@ -28,7 +28,7 @@ try:
         AutoScalingGroupName=AScalename,
         ForceDelete=True
     )
-    time.sleep(20)
+    time.sleep(25)
 except ClientError as e:
     print(e)
     print('Nao ha autoscaling group para deletar')
@@ -67,7 +67,6 @@ try:
 
 except ClientError as e:
     print(e)
-
 
 #Deleta Instancias de NV se existirem
 Lista_instanciasNV = []
@@ -112,7 +111,7 @@ try:
     response = ascl.delete_launch_configuration(
         LaunchConfigurationName=LaunchConfigName
     )
-    time.sleep(5)
+    time.sleep(15)
 except ClientError as e:
     print(e)
     print('Nao ha Launch Config para deletar')
@@ -141,7 +140,7 @@ except ClientError as e:
     print(e)
     print('Nao ha Load Balancers para deletar')
 
-
+time.sleep(10)
 #Deleta Target Group
 
 #Pega ARN do target group para deleta-lo
