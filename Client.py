@@ -4,7 +4,7 @@ import datetime
 import sys
 
 with open('LoadDNS.txt', 'r') as arq:
-    my_url = arq.readline()
+    my_url = 'http://' + arq.readline() + '/tasks'
 
 #my_url = 'http://3.88.142.177:8080/tasks'
 
